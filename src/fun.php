@@ -9,10 +9,21 @@
 
 namespace F;
 
+function noop()
+{
+
+}
+
+function ident( $value )
+{
+    return $value;
+}
+
+
 /**
  * @param $value
  *
- * @return bool|null|string
+ * @return bool|null
  */
 function bool( $value )
 {
