@@ -1,5 +1,6 @@
 {
   "name": "azder/fun",
+  "version": "0.1",
   "autoload": {
     "files": [
       "src/fun.php"
