@@ -1,0 +1,8 @@
+{
+  "name": "azder/fun",
+  "autoload": {
+    "files": [
+      "src/fun.php"
+    ]
+  }
+}
