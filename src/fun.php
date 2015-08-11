@@ -49,3 +49,21 @@ function bool( $value )
     return boolval( $value );
 
 }
+
+function dot( $field, $objarray )
+{
+    return @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
+}
+
+function curry()
+{
+
+    $fixtures = func_get_args();
+    $function = array_shift( $fixtures );
+
+    return function () use ( $function, $fixtures ) {
+        return call_user_func_array( $function, array_merge( $fixtures, func_get_args() ) );
+    };
+
+}
+
