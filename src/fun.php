@@ -63,6 +63,11 @@ function dot( $field, $objarray )
     return empty( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
 }
 
+function ddot( $default, $field, $objarray )
+{
+    return dot( $field, $objarray ) ?: $default;
+}
+
 function curry()
 {
 
