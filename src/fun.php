@@ -32,6 +32,14 @@ function tril( $value )
         return $value;
     }
 
+    if (is_array( $value )) {
+        return ! empty( $value );
+    }
+
+    if (is_object( $value )) {
+        return true;
+    }
+
     $value = trim( strtolower( $value ) );
 
     if (in_array( $value, [ '', 'null', 'maybe' ] )) {
