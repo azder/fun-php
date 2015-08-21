@@ -25,7 +25,7 @@ function ident( $value )
  *
  * @return bool|null
  */
-function bool( $value )
+function tril( $value )
 {
 
     if (null === $value || false === $value || true === $value) {
@@ -52,7 +52,7 @@ function bool( $value )
 
 function dot( $field, $objarray )
 {
-    return @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
+    return empty( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
 }
 
 function curry()
