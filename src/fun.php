@@ -60,7 +60,7 @@ function tril( $value )
 
 function dot( $field, $objarray )
 {
-    return empty( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
+    return is_null( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
 }
 
 function ddot( $default, $field, $objarray )
