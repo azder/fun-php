@@ -75,6 +75,26 @@ function circ( $f, $g )
     };
 }
 
+function memoize( $f )
+{
+
+    return function () use ( $f ) {
+
+        static $mem = [ ];
+
+        $args = func_get_args();
+        $sig  = serialize( $args );
+
+        if ( ! array_key_exists( $sig, $mem )) {
+            $mem[$sig] = call_user_func_array( $f, $args );
+        }
+
+        return $mem[$sig];
+
+    };
+
+}
+
 function curry()
 {
 
