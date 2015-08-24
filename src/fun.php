@@ -68,6 +68,50 @@ function ddot( $default, $field, $objarray )
     return dot( $field, $objarray ) ?: $default;
 }
 
+function first( $test, array $array )
+{
+    foreach ($array as $value) {
+        if ($test( $value )) {
+            return $value;
+        }
+    }
+
+    return null;
+
+}
+
+function last( $test, array $array )
+{
+    return first( $test, array_reverse( $array ) );
+}
+
+function any( $test, array $array )
+{
+
+    foreach ($array as $value) {
+        if ($test( $value )) {
+            return true;
+        }
+    }
+
+    return false;
+
+}
+
+function all( $test, array $array )
+{
+
+    foreach ($array as $v) {
+        if ( ! $test( $v )) {
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+
 function circ( $f, $g )
 {
     return function () use ( $f, $g ) {
