@@ -68,6 +68,13 @@ function ddot( $default, $field, $objarray )
     return dot( $field, $objarray ) ?: $default;
 }
 
+function circ( $f, $g )
+{
+    return function () use ( $f, $g ) {
+        return $f( call_user_func_array( $g, func_get_args() ) );
+    };
+}
+
 function curry()
 {
 
