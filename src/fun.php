@@ -58,6 +58,26 @@ function tril( $value )
 
 }
 
+function yes( $expression )
+{
+    return true === tril( $expression );
+}
+
+function no( $expression )
+{
+    return false === tril( $expression );
+}
+
+function nil( $expression )
+{
+    return null === tril( $expression );
+}
+
+function not( $expression )
+{
+    return ! $expression;
+}
+
 function dot( $field, $objarray )
 {
     return is_null( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
