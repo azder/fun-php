@@ -18,8 +18,8 @@ function println( $expression )
 use function F\circ;
 use function F\curry;
 
-$has_null    = curry( 'F\any', 'is_null' );
-$has_no_null = circ( '\F\not', $has_null );
+$has_null         = curry( 'F\any', 'is_null' );
+$doesnt_have_null = circ( '\F\not', $has_null );
 
 println(
     $has_null( [ 1, 2, 3, 4, 5 ] )
@@ -30,9 +30,9 @@ println(
 ); // true
 
 println(
-    $has_no_null( [ 1, 2, 3, 4, 5 ] )
+    $doesnt_have_null( [ 1, 2, 3, 4, 5 ] )
 ); // true
 
 println(
-    $has_no_null( [ 1, 2, 3, null, 4, 5 ] )
+    $doesnt_have_null( [ 1, 2, 3, null, 4, 5 ] )
 ); // false
