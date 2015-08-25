@@ -21,6 +21,7 @@ use function F\lcirc;
 use function F\lcomp;
 use function F\rcirc;
 use function F\rcomp;
+use function F\unr;
 
 
 $plus = function ( $a, $b ) {
@@ -59,6 +60,10 @@ println( call_user_func( rcomp( $double, $increase ), 1 ) ); // 4
 
 println( call_user_func_array( $mul, $twice( call_user_func_array( $plus, $twice( 3 ) ) ) ) ); // 36
 println( call_user_func( rcomp( $mul, $twice, $plus, $twice ), 3 ) ); // 36
+
+$unar_rcomp       = unr( '\F\rcomp' );
+$unarily_composed = $unar_rcomp( [ $mul, $twice, $plus, $twice ] );
+println( $unarily_composed( 3 ) ); // 36
 
 
 

@@ -132,6 +132,13 @@ function all( $test, array $array )
 }
 
 
+function unr( $function )
+{
+    return function ( array $args = [ ] ) use ( $function ) {
+        return call_user_func_array( $function, $args );
+    };
+}
+
 function rcirc( $f, $g )
 {
     return function () use ( $f, $g ) {
