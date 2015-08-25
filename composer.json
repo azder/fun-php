@@ -1,6 +1,6 @@
 {
   "name": "azder/fun",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A FUNctional suplement for PHP",
   "license": "MIT",
   "autoload": {
