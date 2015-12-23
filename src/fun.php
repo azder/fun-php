@@ -215,3 +215,24 @@ function curry()
 
 }
 
+/**
+ * @param array $keys
+ * @param stdClass|array $data
+ *
+ * @return array
+ */
+function pick( array $keys = [ ], $data = [ ] )
+{
+    return array_intersect_key( $data, array_flip( $keys ) );
+}
+
+/**
+ * @param array $keys
+ * @param stdClass|array $data
+ *
+ * @return array
+ */
+function omit( array $keys = [ ], $data = [ ] )
+{
+    return array_diff_key( $data, array_flip( $keys ) );
+}
