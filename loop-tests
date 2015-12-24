@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+./run-tests
+fswatch -r -t -u -o ./test/ ./src/ | xargs -n1 ./run-tests
