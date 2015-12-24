@@ -9,11 +9,19 @@
 
 namespace F;
 
+/**
+ * @return void
+ */
 function noop()
 {
 
 }
 
+/**
+ * @param mixed $value
+ *
+ * @return mixed
+ */
 function ident( $value )
 {
     return $value;
@@ -58,36 +66,75 @@ function tril( $value )
 
 }
 
+/**
+ * @param $expression
+ *
+ * @return bool
+ */
 function yes( $expression )
 {
     return true === tril( $expression );
 }
 
+/**
+ * @param $expression
+ *
+ * @return bool
+ */
 function no( $expression )
 {
     return false === tril( $expression );
 }
 
+/**
+ * @param $expression
+ *
+ * @return bool
+ */
 function nil( $expression )
 {
     return null === tril( $expression );
 }
 
+/**
+ * @param $expression
+ *
+ * @return bool
+ */
 function not( $expression )
 {
     return ! $expression;
 }
 
+/**
+ * @param string $field
+ * @param \stdClass|array $objarray
+ *
+ * @return null
+ */
 function dot( $field, $objarray )
 {
     return is_null( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
 }
 
+/**
+ * @param mixed $default
+ * @param string $field
+ * @param \stdClass|array $objarray
+ *
+ * @return mixed
+ */
 function ddot( $default, $field, $objarray )
 {
     return dot( $field, $objarray ) ?: $default;
 }
 
+/**
+ * @param callable $test
+ * @param array $array
+ *
+ * @return null|mixed
+ */
 function first( $test, array $array )
 {
     foreach ($array as $value) {
@@ -100,11 +147,23 @@ function first( $test, array $array )
 
 }
 
+/**
+ * @param callable $test
+ * @param array $array
+ *
+ * @return null|mixed
+ */
 function last( $test, array $array )
 {
     return first( $test, array_reverse( $array ) );
 }
 
+/**
+ * @param callable $test
+ * @param array $array
+ *
+ * @return bool
+ */
 function any( $test, array $array )
 {
 
@@ -118,6 +177,12 @@ function any( $test, array $array )
 
 }
 
+/**
+ * @param callable $test
+ * @param array $array
+ *
+ * @return bool
+ */
 function all( $test, array $array )
 {
 
@@ -132,6 +197,11 @@ function all( $test, array $array )
 }
 
 
+/**
+ * @param callable $function
+ *
+ * @return \Closure
+ */
 function unr( $function )
 {
     return function ( array $args = [ ] ) use ( $function ) {
@@ -139,6 +209,12 @@ function unr( $function )
     };
 }
 
+/**
+ * @param callable $f
+ * @param callable $g
+ *
+ * @return \Closure
+ */
 function rcirc( $f, $g )
 {
     return function () use ( $f, $g ) {
@@ -146,6 +222,12 @@ function rcirc( $f, $g )
     };
 }
 
+/**
+ * @param callable $f
+ * @param callable $g
+ *
+ * @return \Closure
+ */
 function lcirc( $f, $g )
 {
     return function () use ( $f, $g ) {
@@ -153,6 +235,12 @@ function lcirc( $f, $g )
     };
 }
 
+/**
+ *
+ * @param callable ...
+ *
+ * @return \Closure
+ */
 function rcomp()
 {
 
@@ -168,6 +256,11 @@ function rcomp()
 
 }
 
+/**
+ * @param callable ...
+ *
+ * @return \Closure
+ */
 function lcomp()
 {
 
@@ -183,6 +276,11 @@ function lcomp()
 
 }
 
+/**
+ * @param callable $f
+ *
+ * @return \Closure
+ */
 function memoize( $f )
 {
 
@@ -203,7 +301,13 @@ function memoize( $f )
 
 }
 
-function curry()
+/**
+ * @param callable $fn
+ * @param mixed...
+ *
+ * @return \Closure
+ */
+function curry( $fn )
 {
 
     $fixtures = func_get_args();
@@ -217,22 +321,22 @@ function curry()
 
 /**
  * @param array $keys
- * @param stdClass|array $data
+ * @param \stdClass|array $objarray
  *
  * @return array
  */
-function pick( array $keys = [ ], $data = [ ] )
+function pick( array $keys = [ ], $objarray = [ ] )
 {
-    return array_intersect_key( $data, array_flip( $keys ) );
+    return array_intersect_key( $objarray, array_flip( $keys ) );
 }
 
 /**
  * @param array $keys
- * @param stdClass|array $data
+ * @param \stdClass|array $objarray
  *
  * @return array
  */
-function omit( array $keys = [ ], $data = [ ] )
+function omit( array $keys = [ ], $objarray = [ ] )
 {
-    return array_diff_key( $data, array_flip( $keys ) );
+    return array_diff_key( $objarray, array_flip( $keys ) );
 }
