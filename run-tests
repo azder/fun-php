@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./vendor/bin/phpunit test/
+./vendor/bin/phpunit --coverage-text --coverage-html tmp/coverage test/
