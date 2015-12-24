@@ -48,17 +48,21 @@ function tril( $value )
         return true;
     }
 
+    if (is_double($value) && is_nan( $value )) {
+        return null;
+    }
+
     $value = trim( strtolower( $value ) );
 
     if (in_array( $value, [ '', 'null', 'maybe' ] )) {
         return null;
     }
 
-    if (in_array( $value, [ 'no', 'off', '0' ] )) {
+    if (in_array( $value, [ 'no', 'off', '0', 'false' ] )) {
         return false;
     }
 
-    if (in_array( $value, [ 'yes', 'on', '1' ] )) {
+    if (in_array( $value, [ 'yes', 'on', '1', 'true' ] )) {
         return true;
     }
 
@@ -303,7 +307,7 @@ function memoize( $f )
 
 /**
  * @param callable $fn
- * @param mixed...
+ * @param mixed ...
  *
  * @return \Closure
  */
