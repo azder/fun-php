@@ -112,7 +112,7 @@ function not( $expression )
 
 /**
  * @param string $field
- * @param \stdClass|array $objarray
+ * @param \stdClass|array|object $objarray
  *
  * @return null
  */
