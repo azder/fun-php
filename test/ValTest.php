@@ -9,7 +9,7 @@
 namespace F\Test;
 
 
-class DotTest extends \PHPUnit_Framework_TestCase
+class ValTest extends \PHPUnit_Framework_TestCase
 {
 
     public function test_keyed_array()

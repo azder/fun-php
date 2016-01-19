@@ -133,6 +133,38 @@ function vald( $default, $field, $objarray )
     return val( $field, $objarray ) ?: $default;
 }
 
+
+/**
+ * @param $path
+ * @param \stdClass|array|object $value
+ *
+ * @return mixed|null
+ */
+function nav( $path, $value )
+{
+
+    if (empty( $value )) {
+        return $value;
+    }
+
+    $segments = array_map( function ( $segment ) {
+        return trim( $segment );
+    }, explode( '->', $path ) );
+
+    foreach ($segments as $segment) {
+        if (is_array( $value )) {
+            $value = array_key_exists( $segment, $value ) ? $value[$segment] : null;
+        } else if (is_object( $value )) {
+            $value = isset( $value->$segment ) ? $value->$segment : null;
+        } else {
+            return null;
+        }
+    }
+
+    return $value;
+
+}
+
 /**
  * @param callable $test
  * @param array $array
@@ -344,3 +376,4 @@ function omit( array $keys = [ ], $objarray = [ ] )
 {
     return array_diff_key( $objarray, array_flip( $keys ) );
 }
+
