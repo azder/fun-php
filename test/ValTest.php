@@ -22,9 +22,10 @@ class DotTest extends \PHPUnit_Framework_TestCase
         ];
 
         foreach ($array as $key => $value) {
-            $returned = \F\dot( $key, $array );
+            $returned = \F\val( $key, $array );
             $this->assertSame( $value, $returned,
-                'dot(' . var_export( $key, true ) . ', ' . var_export( $array, true ) . ') '
+                '
+                (' . var_export( $key, true ) . ', ' . var_export( $array, true ) . ') '
                 . 'should return `'
                 . var_export( $value, true ) . '`, not ' . var_export( $returned, true ) . ''
             );
@@ -45,11 +46,11 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $count = count( $array );
 
         for ($i = 0; $i < $count; $i += 1) {
-            $returned = \F\dot( $i, $array );
+            $returned = \F\val( $i, $array );
             $rexp     = var_export( $returned, true );
             $value    = $array[$i];
             $vexp     = var_export( $value, true );
-            $this->assertSame( $value, $returned, "dot($i, $aexpr ) should return `$vexp`, not `$rexp`" );
+            $this->assertSame( $value, $returned, "val($i, $aexpr ) should return `$vexp`, not `$rexp`" );
         }
 
 
@@ -82,16 +83,16 @@ class DotTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( $assumed, $array, 'test array not as assumed' );
 
 
-        $r0 = \F\dot( $k0, $array );
+        $r0 = \F\val( $k0, $array );
         $this->assertSame( $v0, $r0, "value for `$k0` should be `$v0`, not `$r0`" );
 
-        $r1 = \F\dot( $k1, $array );
+        $r1 = \F\val( $k1, $array );
         $this->assertSame( $v1, $r1, "value for `$k1` should be `$v1`, not `$r1`" );
 
-        $r2 = \F\dot( $k2, $array );
+        $r2 = \F\val( $k2, $array );
         $this->assertSame( $v2, $r2, "value for `$k2` should be `$v2`, not `$r2`" );
 
-        $r3 = \F\dot( $k3, $array );
+        $r3 = \F\val( $k3, $array );
         $this->assertSame( $v3, $r3, "value for `$k3` should be `$v3`, not `$r3`" );
 
     }

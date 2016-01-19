@@ -48,7 +48,7 @@ function tril( $value )
         return true;
     }
 
-    if (is_double($value) && is_nan( $value )) {
+    if (is_double( $value ) && is_nan( $value )) {
         return null;
     }
 
@@ -116,7 +116,7 @@ function not( $expression )
  *
  * @return null
  */
-function dot( $field, $objarray )
+function val( $field, $objarray )
 {
     return is_null( $field ) ? null : @( is_array( $objarray ) ? $objarray[$field] : $objarray->$field );
 }
@@ -128,9 +128,9 @@ function dot( $field, $objarray )
  *
  * @return mixed
  */
-function ddot( $default, $field, $objarray )
+function vald( $default, $field, $objarray )
 {
-    return dot( $field, $objarray ) ?: $default;
+    return val( $field, $objarray ) ?: $default;
 }
 
 /**
