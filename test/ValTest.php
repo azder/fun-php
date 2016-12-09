@@ -98,4 +98,40 @@ class ValTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function test_set_null_key_on_array()
+    {
+
+        $field = null;
+        $value = 1;
+
+        $array  = [ ];
+        $result = \F\set( $field, $value, $array );
+
+        $this->assertEquals( $array, $result,
+            "set($field,$value," . var_export( $array, true )
+            . ') should return the same array, not'
+            . var_export( $result, true )
+        );
+    }
+
+    public function test_set_null_field_on_object()
+    {
+
+        $field = null;
+        $value = 1;
+
+        $object = new \stdClass();
+        $result = \F\set( $field, $value, $object );
+
+        $this->assertEquals( $object, $result,
+            "set($field,$value," . var_export( $object, true )
+            . ') should return the same object, not'
+            . var_export( $result, true )
+        );
+
+        //$this->assertObjectNotHasAttribute( $field, $object, 'set(null,1,$object) should not create attribute' );
+
+    }
+
+
 }
