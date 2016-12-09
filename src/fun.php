@@ -133,6 +133,41 @@ function vald( $default, $field, $objarray )
     return val( $field, $objarray ) ?: $default;
 }
 
+function set( $field, $value, $objarray )
+{
+
+    if (is_null( $field )) {
+        return $objarray;
+    }
+
+    if (is_array( $objarray )) {
+        $objarray[$field] = $value;
+    } else {
+        $objarray->$field = $value;
+    }
+    return $objarray;
+}
+
+function put( $field, $objarray, $value )
+{
+    if (is_array( $objarray )) {
+        $objarray[$field] = $value;
+    } else {
+        $objarray->$field = $value;
+    }
+    return $value;
+}
+
+function del( $field, $objarray )
+{
+    if (is_array( $objarray )) {
+        unset( $objarray[$field] );
+    } else {
+        unset( $objarray->$field );
+    }
+    return $objarray;
+}
+
 
 /**
  * @param $path
@@ -163,6 +198,18 @@ function nav( $path, $value )
 
     return $value;
 
+}
+
+/**
+ * @param mixed $default
+ * @param $path
+ * @param \stdClass|array|object $value
+ *
+ * @return mixed
+ */
+function navd( $default, $path, $value )
+{
+    return nav( $path, $value ) ?: $default;
 }
 
 /**
@@ -240,7 +287,7 @@ function all( $test, array $array )
  */
 function unr( $function )
 {
-    return function ( array $args = [ ] ) use ( $function ) {
+    return function ( array $args = [] ) use ( $function ) {
         return call_user_func_array( $function, $args );
     };
 }
@@ -322,7 +369,7 @@ function memoize( $f )
 
     return function () use ( $f ) {
 
-        static $mem = [ ];
+        static $mem = [];
 
         $args = func_get_args();
         $sig  = serialize( $args );
@@ -361,7 +408,7 @@ function curry( $fn )
  *
  * @return array
  */
-function pick( array $keys = [ ], $objarray = [ ] )
+function pick( array $keys = [], $objarray = [] )
 {
     return array_intersect_key( $objarray, array_flip( $keys ) );
 }
@@ -372,7 +419,7 @@ function pick( array $keys = [ ], $objarray = [ ] )
  *
  * @return array
  */
-function omit( array $keys = [ ], $objarray = [ ] )
+function omit( array $keys = [], $objarray = [] )
 {
     return array_diff_key( $objarray, array_flip( $keys ) );
 }
