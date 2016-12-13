@@ -12,6 +12,19 @@ namespace F\Test;
 class NavTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function test_array_path()
+    {
+        $value    = 'value';
+        $array    = [ 'some' => [ 'path' => $value ] ];
+        $path     = [ 'some', 'path' ];
+        $returned = \F\nav( $path, $array );
+        $this->assertEquals(
+            $value,
+            $returned,
+            'nav(' . var_export( $path, true ) . ', ' . var_export( $array, true ) . ') can use array as path'
+        );
+    }
+
     public function test_premature_end_of_values()
     {
 
@@ -24,7 +37,8 @@ class NavTest extends \PHPUnit_Framework_TestCase
         foreach ($array as $key => $value) {
             $path     = $key . '-> something_extra';
             $returned = \F\nav( $path, $array );
-            $this->assertNull( $returned,
+            $this->assertNull(
+                $returned,
                 'nav(' . var_export( $path, true ) . ', ' . var_export( $array, true )
                 . ') should return `null`, not ' . var_export( $returned, true ) . ''
             );

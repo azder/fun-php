@@ -170,7 +170,7 @@ function del( $field, $objarray )
 
 
 /**
- * @param $path
+ * @param string|array $path
  * @param \stdClass|array|object $value
  *
  * @return mixed|null
@@ -182,9 +182,12 @@ function nav( $path, $value )
         return $value;
     }
 
-    $segments = array_map( function ( $segment ) {
-        return trim( $segment );
-    }, explode( '->', $path ) );
+    $segments = array_map(
+        function ( $segment ) {
+            return trim( $segment );
+        },
+        is_array( $path ) ? $path : explode( '->', $path )
+    );
 
     foreach ($segments as $segment) {
         if (is_array( $value )) {
@@ -202,7 +205,7 @@ function nav( $path, $value )
 
 /**
  * @param mixed $default
- * @param $path
+ * @param string|array $path
  * @param \stdClass|array|object $value
  *
  * @return mixed
