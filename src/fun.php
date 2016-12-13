@@ -124,7 +124,7 @@ function val( $field, $objarray )
 /**
  * @param mixed $default
  * @param string $field
- * @param \stdClass|array $objarray
+ * @param \stdClass|array|object $objarray
  *
  * @return mixed
  */
