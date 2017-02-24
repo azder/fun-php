@@ -29,7 +29,7 @@ function ident( $value )
 
 
 /**
- * @param $value
+ * @param mixed $value
  *
  * @return bool|null
  */
@@ -71,7 +71,7 @@ function tril( $value )
 }
 
 /**
- * @param $expression
+ * @param mixed $expression
  *
  * @return bool
  */
@@ -81,7 +81,7 @@ function yes( $expression )
 }
 
 /**
- * @param $expression
+ * @param mixed $expression
  *
  * @return bool
  */
@@ -91,7 +91,7 @@ function no( $expression )
 }
 
 /**
- * @param $expression
+ * @param mixed $expression
  *
  * @return bool
  */
@@ -101,7 +101,24 @@ function nil( $expression )
 }
 
 /**
- * @param $expression
+ * @param string $field
+ * @param object|array $objarray
+ *
+ * @return bool
+ */
+function exists( $field, $objarray )
+{
+
+    if (is_array( $objarray )) {
+        return array_key_exists( $field, $objarray );
+    }
+
+    return property_exists( $objarray, $field );
+
+}
+
+/**
+ * @param mixed $expression
  *
  * @return bool
  */
@@ -114,7 +131,7 @@ function not( $expression )
  * @param string $field
  * @param \stdClass|array|object $objarray
  *
- * @return null
+ * @return mixed|null
  */
 function val( $field, $objarray )
 {
@@ -126,13 +143,20 @@ function val( $field, $objarray )
  * @param string $field
  * @param \stdClass|array|object $objarray
  *
- * @return mixed
+ * @return mixed|null
  */
 function vald( $default, $field, $objarray )
 {
     return val( $field, $objarray ) ?: $default;
 }
 
+/**
+ * @param string $field
+ * @param mixed $value
+ * @param object|array $objarray
+ *
+ * @return object|array
+ */
 function set( $field, $value, $objarray )
 {
 
@@ -145,19 +169,38 @@ function set( $field, $value, $objarray )
     } else {
         $objarray->$field = $value;
     }
+
     return $objarray;
+
 }
 
-function put( $field, $objarray, $value )
+/**
+ * @param string $field
+ * @param object|array $objarray
+ * @param mixed $value
+ *
+ * @return mixed
+ */
+function put( $field, &$objarray, $value )
 {
+
     if (is_array( $objarray )) {
         $objarray[$field] = $value;
     } else {
         $objarray->$field = $value;
     }
+
     return $value;
+
 }
 
+
+/**
+ * @param string $field
+ * @param object|array $objarray
+ *
+ * @return mixed
+ */
 function del( $field, $objarray )
 {
     if (is_array( $objarray )) {
@@ -168,10 +211,46 @@ function del( $field, $objarray )
     return $objarray;
 }
 
+/**
+ *
+ * Transfer value from
+ *      $origin[$ofield] only when key exists
+ *      or
+ *      $origin->$ofield only when property exists
+ *
+ * to $destination[$dfield] or $destination->$dfield depending on type
+ *
+ * @param string $dfield
+ * @param array|object $destination
+ * @param string $ofield
+ * @param array|object $origin
+ *
+ * @return array|object
+ *
+ *
+ */
+function xfer( $dfield, $destination, $ofield, $origin )
+{
+
+    if ( ! exists( $ofield, $origin )) {
+        return $destination;
+    }
+
+    $value = val( $ofield, $origin );
+
+    if (is_array( $destination )) {
+        $destination[$dfield] = $value;
+    } else {
+        $destination->$dfield = $value;
+    }
+
+    return $destination;
+
+}
 
 /**
  * @param string|array $path
- * @param \stdClass|array|object $value
+ * @param array|object $value
  *
  * @return mixed|null
  */
@@ -206,7 +285,7 @@ function nav( $path, $value )
 /**
  * @param mixed $default
  * @param string|array $path
- * @param \stdClass|array|object $value
+ * @param array|object $value
  *
  * @return mixed
  */
