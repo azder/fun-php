@@ -375,6 +375,38 @@ function unr( $function )
 }
 
 /**
+ *
+ * Wrapper for @see ksort that ignores the boolean indicator of success and just returns the array
+ *
+ * @param array $array
+ *
+ * @return array
+ */
+function keysort( $array )
+{
+
+    ksort( $array );
+    return $array;
+
+}
+
+/**
+ *
+ * Wrapper for @see sort that ignores the boolean indicator of success and just returns the array
+ *
+ * @param array $array
+ *
+ * @return array
+ */
+function valsort( $array )
+{
+
+    sort( $array );
+    return $array;
+
+}
+
+/**
  * @param callable $f
  * @param callable $g
  *
